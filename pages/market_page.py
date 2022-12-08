@@ -16,5 +16,12 @@ class MarketPage(BasePage):
 
     def all_subcategories_is_enabled(self):
         subcategories = self.find_elements(all_subcategories)
-        for i in subcategories:
-            yield i.is_enabled()
+        for i in range(len(subcategories)):
+            result = bool(subcategories[i].is_enabled())
+            if result == False:
+                print(f'link №{i+1} not enabled')
+                return False
+        return True
+
+
+

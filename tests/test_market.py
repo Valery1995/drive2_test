@@ -3,10 +3,13 @@ from time import sleep
 import pytest
 
 
-def test_asdas(driver):
+# @pytest.mark.parametrize('creds', all_subcategories_is_enabled())
+def test_all_subcategories_is_enabled(driver):
     market = MarketPage(driver)
     market.open_page()
-    for i in market.all_subcategories_is_enabled():
-        print(i)
-        assert i
+    assert market.all_subcategories_is_enabled()
+
+
+
+
 
