@@ -100,3 +100,46 @@ def test_correct_login_details(driver):
     signup.enter_login_details(email='correct@mail.ru', phone='+375229631731')
     assert signup.mobile_verification().is_displayed()
 
+
+def test_check_user_agreement(driver):
+    signup = SignupPage(driver)
+    signup.open_page()
+    signup.click_signup_button()
+    signup.click_user_agreement()
+    signup.switch_to_window()
+    assert signup.check_title_text() == 'Пользовательское соглашение'
+
+
+def test_check_site_rules(driver):
+    signup = SignupPage(driver)
+    signup.open_page()
+    signup.click_signup_button()
+    signup.click_site_rules()
+    signup.switch_to_window()
+    assert signup.check_title_text() == 'Основной закон DRIVE2'
+
+
+def test_check_data_use(driver):
+    signup = SignupPage(driver)
+    signup.open_page()
+    signup.click_signup_button()
+    signup.click_data_use()
+    signup.switch_to_window()
+    assert signup.check_title_text() == 'Политика обработки персональных данных'
+
+
+def test_check_personal_agreement(driver):
+    signup = SignupPage(driver)
+    signup.open_page()
+    signup.click_signup_button()
+    signup.click_personal_agreement()
+    signup.switch_to_window()
+    assert signup.check_title_text() == 'Согласие на обработку персональных данных'
+
+
+def test_check_business_account(driver):
+    signup = SignupPage(driver)
+    signup.open_page()
+    signup.click_signup_button()
+    signup.click_business_account()
+    assert signup.check_title_text() == 'Бизнес-аккаунт'

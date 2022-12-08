@@ -5,7 +5,7 @@ import pytest
 from time import sleep
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope='function')
 def driver():
     options = Options()
     options.add_argument('start-maximized')

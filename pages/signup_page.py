@@ -16,10 +16,12 @@ field_error = (By.CLASS_NAME, 'field-validation-error')
 mobile_number_verification = (By.CSS_SELECTOR, 'h1[class="x-title"]')
 
 user_agreement = (By.CSS_SELECTOR, 'a[href="/agreement/"]')
-sire_rules = (By.CSS_SELECTOR, 'a[href="/rules/"]')
+site_rules = (By.CSS_SELECTOR, 'a[href="/rules/"]')
 data_use = (By.CSS_SELECTOR, 'a[href="/data-use/"]')
-personal_agreement = (By.CSS_SELECTOR, 'href="/agreement/personal/"')
+personal_agreement = (By.CSS_SELECTOR, 'a[href="/agreement/personal/"]')
 business_account = (By.CSS_SELECTOR, 'a[href="/business/"]')
+
+title_text = (By.CLASS_NAME, 'l-page-header')
 
 
 class SignupPage(BasePage):
@@ -70,6 +72,28 @@ class SignupPage(BasePage):
 
     def mobile_verification(self):
         return self.find_element(mobile_number_verification)
+
+    def click_user_agreement(self):
+        self.find_element(user_agreement).click()
+
+    def check_title_text(self):
+        return self.find_element(title_text).text
+
+    def switch_to_window(self):
+        tabs = self.driver.window_handles
+        self.driver.switch_to.window(tabs[1])
+
+    def click_site_rules(self):
+        self.find_element(site_rules).click()
+
+    def click_data_use(self):
+        self.find_element(data_use).click()
+
+    def click_personal_agreement(self):
+        self.find_element(personal_agreement).click()
+
+    def click_business_account(self):
+        self.find_element(business_account).click()
 
     @property
     def url(self):
