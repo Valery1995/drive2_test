@@ -82,3 +82,22 @@ class MarketPage(BasePage):
                 return False
             self.driver.back()
         return True
+
+    def ssdf_sdf(self):
+        options = self.find_element(select_brand).find_elements(By.CSS_SELECTOR, 'option[value]')[1:-1]
+        cars_name_list = []
+        for car in options:
+            cars_name_list.append(car.text)
+        for car_name in cars_name_list:
+            print(car_name)
+            select = Select(self.driver.find_element(By.CSS_SELECTOR, 'select[name="brand"]'))
+            select.select_by_visible_text(car_name)
+            sleep(3)
+            for i in range(4):
+                details = self.find_elements(car_details)
+                details[i].click()
+                information_suitable = self.find_elements(information)[0].text.find(f'{car_name}')
+                if information_suitable == -1:
+                    return False
+                self.driver.back()
+        return True

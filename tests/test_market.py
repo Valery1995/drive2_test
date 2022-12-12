@@ -32,3 +32,9 @@ def test_old_detail_filter(driver):
     condition = MarketPage(driver)
     condition.open_page_filter()
     assert condition.old_detail_filter_is_ok()
+
+
+def test_sdfdsdf(driver):
+    market = MarketPage(driver)
+    market.open_page_filter()
+    assert market.ssdf_sdf()
