@@ -83,13 +83,12 @@ class MarketPage(BasePage):
             self.driver.back()
         return True
 
-    def ssdf_sdf(self):
+    def brand_car_filter_is_ok(self):
         options = self.find_element(select_brand).find_elements(By.CSS_SELECTOR, 'option[value]')[1:-1]
         cars_name_list = []
         for car in options:
             cars_name_list.append(car.text)
         for car_name in cars_name_list:
-            print(car_name)
             select = Select(self.driver.find_element(By.CSS_SELECTOR, 'select[name="brand"]'))
             select.select_by_visible_text(car_name)
             sleep(3)
@@ -98,6 +97,32 @@ class MarketPage(BasePage):
                 details[i].click()
                 information_suitable = self.find_elements(information)[0].text.find(f'{car_name}')
                 if information_suitable == -1:
+                    return False
+                self.driver.back()
+        return True
+
+    def model_car_filter_is_ok(self):
+        select = Select(self.driver.find_element(By.CSS_SELECTOR, 'select[name="brand"]'))
+        select.select_by_visible_text('BMW')
+        options = self.find_element(select_model).find_elements(By.CSS_SELECTOR, 'option[value]')[1:11]
+        model_name_list = []
+        for model_name in options:
+            model_name_list.append(model_name.text)
+        for model in model_name_list:
+            select_second = Select(self.driver.find_element(By.CSS_SELECTOR, 'select[name="model"]'))
+            select_second.select_by_visible_text(model)
+            sleep(2)
+            len_details = len(self.find_elements(car_details))
+            if len_details == 0:
+                continue
+            if len_details > 5:
+                len_details = 5
+            for i in range(len_details):
+                details = self.find_elements(car_details)
+                details[i].click()
+                information_suitable = self.find_elements(information)[0].text.find(f'BMW {model}')
+                if information_suitable == -1:
+                    print(f'Валера, я упал на фильтре по моделе "{model}"')
                     return False
                 self.driver.back()
         return True

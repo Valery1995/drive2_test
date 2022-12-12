@@ -34,7 +34,13 @@ def test_old_detail_filter(driver):
     assert condition.old_detail_filter_is_ok()
 
 
-def test_sdfdsdf(driver):
+def test_brand_car_filter(driver):
     market = MarketPage(driver)
     market.open_page_filter()
-    assert market.ssdf_sdf()
+    assert market.brand_car_filter_is_ok()
+
+
+def test_model_car_filter(driver):
+    market = MarketPage(driver)
+    market.open_page_filter()
+    assert market.model_car_filter_is_ok()
