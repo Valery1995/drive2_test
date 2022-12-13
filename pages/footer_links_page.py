@@ -91,4 +91,8 @@ class FooterLinksPage(BasePage):
     def click_market_button(self):
         self.find_elements(main_buttons)[4].click()
 
+    def click_new_featured(self):
+        self.find_elements(main_buttons)[5].click()
 
+    def click_cars_for_sale_button(self):
+        self.find_elements(main_buttons)[6].click()

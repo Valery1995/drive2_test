@@ -1,6 +1,7 @@
 from pages.signup_page import SignupPage
 from time import sleep
 import pytest
+import allure
 
 INVALID_LOGIN = [
     {'email': 'mail@something', 'phone': '12345678901'},
@@ -14,6 +15,8 @@ INVALID_PHONE = [
 ]
 
 
+@allure.feature('Authentication')
+@allure.story('Registration')
 def test_vk_registration(driver):
     signup = SignupPage(driver)
     signup.open_page()
@@ -22,6 +25,8 @@ def test_vk_registration(driver):
     assert signup.url.find('vk.com') != -1
 
 
+@allure.feature('Authentication')
+@allure.story('Registration')
 def test_yandex_registration(driver):
     signup = SignupPage(driver)
     signup.open_page()
@@ -30,6 +35,8 @@ def test_yandex_registration(driver):
     assert signup.url.find('passport.yandex.ru') != -1
 
 
+@allure.feature('Authentication')
+@allure.story('Registration')
 def test_apple_registration(driver):
     signup = SignupPage(driver)
     signup.open_page()
@@ -38,6 +45,8 @@ def test_apple_registration(driver):
     assert signup.url.find('appleid.apple.com') != -1
 
 
+@allure.feature('Authentication')
+@allure.story('Registration')
 def test_google_registration(driver):
     signup = SignupPage(driver)
     signup.open_page()
@@ -46,6 +55,8 @@ def test_google_registration(driver):
     assert signup.url.find('accounts.google.com') != -1
 
 
+@allure.feature('Authentication')
+@allure.story('Registration')
 def test_home_button(driver):
     signup = SignupPage(driver)
     signup.open_page()
@@ -54,6 +65,8 @@ def test_home_button(driver):
     assert signup.url == 'https://www.drive2.ru/'
 
 
+@allure.feature('Authentication')
+@allure.story('Login')
 def test_only_login(driver):
     signup = SignupPage(driver)
     signup.open_page()
@@ -62,6 +75,8 @@ def test_only_login(driver):
     assert signup.introduced_only_login(email='aniskevich@mail.ru') == 'Укажите телефон'
 
 
+@allure.feature('Authentication')
+@allure.story('Phone')
 def test_only_phone(driver):
     signup = SignupPage(driver)
     signup.open_page()
@@ -70,6 +85,8 @@ def test_only_phone(driver):
     assert signup.introduced_only_phone(phone='375299631731') == 'Укажите адрес электронной почты'
 
 
+@allure.feature('Authentication')
+@allure.story('Registration')
 @pytest.mark.parametrize('creds', INVALID_LOGIN)
 def test_registration_invalid_email(driver, creds):
     signup = SignupPage(driver)
@@ -82,6 +99,8 @@ def test_registration_invalid_email(driver, creds):
                                                f"дефис, плюс, подчеркивание, точки и @.")
 
 
+@allure.feature('Authentication')
+@allure.story('Phone')
 @pytest.mark.parametrize('creds', INVALID_PHONE)
 def test_registration_invalid_phone(driver, creds):
     signup = SignupPage(driver)
@@ -92,6 +111,8 @@ def test_registration_invalid_phone(driver, creds):
     assert signup.check_field_error_text() == creds['error']
 
 
+@allure.feature('Authentication')
+@allure.story('Registration')
 def test_correct_login_details(driver):
     signup = SignupPage(driver)
     signup.open_page()
@@ -101,15 +122,24 @@ def test_correct_login_details(driver):
     assert signup.mobile_verification().is_displayed()
 
 
+@allure.feature('Authentication')
+@allure.story('Terms')
 def test_check_user_agreement(driver):
     signup = SignupPage(driver)
-    signup.open_page()
-    signup.click_signup_button()
-    signup.click_user_agreement()
-    signup.switch_to_window()
-    assert signup.check_title_text() == 'Пользовательское соглашение'
+    with allure.step('Открываем главную страницу страницу'):
+        signup.open_page()
+    with allure.step('Кликаем кнопку Зарегистрироваться'):
+        signup.click_signup_button()
+    with allure.step('Кликаем условия Пользовательского соглашения'):
+        signup.click_user_agreement()
+    with allure.step('Переходим на новую вкладку'):
+        signup.switch_to_window()
+    with allure.step('Проверяем, что заглавие страцины - Пользовательское соглашение'):
+        assert signup.check_title_text() == 'Пользовательское соглашение'
 
 
+@allure.feature('Authentication')
+@allure.story('Terms')
 def test_check_site_rules(driver):
     signup = SignupPage(driver)
     signup.open_page()
@@ -119,6 +149,8 @@ def test_check_site_rules(driver):
     assert signup.check_title_text() == 'Основной закон DRIVE2'
 
 
+@allure.feature('Authentication')
+@allure.story('Terms')
 def test_check_data_use(driver):
     signup = SignupPage(driver)
     signup.open_page()
@@ -128,6 +160,8 @@ def test_check_data_use(driver):
     assert signup.check_title_text() == 'Политика обработки персональных данных'
 
 
+@allure.feature('Authentication')
+@allure.story('Terms')
 def test_check_personal_agreement(driver):
     signup = SignupPage(driver)
     signup.open_page()
@@ -137,6 +171,8 @@ def test_check_personal_agreement(driver):
     assert signup.check_title_text() == 'Согласие на обработку персональных данных'
 
 
+@allure.feature('Authentication')
+@allure.story('Terms')
 def test_check_business_account(driver):
     signup = SignupPage(driver)
     signup.open_page()

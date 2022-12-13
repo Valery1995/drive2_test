@@ -76,3 +76,17 @@ def test_market_button(driver):
     menu.open_page()
     menu.click_market_button()
     assert menu.title_name == 'Барахолка'
+
+
+def test_new_featured(driver):
+    menu = FooterLinksPage(driver)
+    menu.open_page()
+    menu.click_new_featured()
+    assert menu.title_name == 'Самое интересное'
+
+
+def test_cars_for_sale_button(driver):
+    menu = FooterLinksPage(driver)
+    menu.open_page()
+    menu.click_cars_for_sale_button()
+    assert menu.title_name == 'Продажа машин с историей'

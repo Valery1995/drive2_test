@@ -40,7 +40,7 @@ class MarketPage(BasePage):
             cites = self.find_elements(city_list)
             name_city = cites[i].text
             cites[i].click()
-            for num in range(3):
+            for num in range(5):
                 details = self.find_elements(car_details)
                 details[num].click()
                 location = self.find_elements(location_information)[0].text.split(' (')[0]
