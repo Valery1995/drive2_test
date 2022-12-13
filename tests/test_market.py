@@ -1,7 +1,6 @@
 from pages.market_page import MarketPage
 from time import sleep
 import pytest
-from selenium.webdriver.support.ui import Select
 
 
 def test_all_subcategories_is_enabled(driver):
