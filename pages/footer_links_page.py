@@ -14,6 +14,8 @@ title = (By.CSS_SELECTOR, 'h1[class=x-title]')
 request = (By.CSS_SELECTOR, 'div[class="wizard-header padding-top-0"]')
 badge = (By.CSS_SELECTOR, 'h3[class="c-cp-header"]')
 app_title = (By.CSS_SELECTOR, 'h1[class="mm-header"]')
+main_title = (By.CLASS_NAME, 'x-title-header')
+main_buttons = (By.CSS_SELECTOR, 'a[class="c-nav-block__item u-bold c-nav-block__item--caption"]')
 
 
 class FooterLinksPage(BasePage):
@@ -69,5 +71,24 @@ class FooterLinksPage(BasePage):
                 return False
             self.driver.back()
         return True
+
+    def click_cars_button(self):
+        self.find_elements(main_buttons)[0].click()
+
+    @property
+    def title_name(self):
+        return self.find_element(main_title).text
+
+    def click_experience_button(self):
+        self.find_elements(main_buttons)[1].click()
+
+    def click_communities_button(self):
+        self.find_elements(main_buttons)[2].click()
+
+    def click_shops_button(self):
+        self.find_elements(main_buttons)[3].click()
+
+    def click_market_button(self):
+        self.find_elements(main_buttons)[4].click()
 
 

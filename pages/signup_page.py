@@ -55,6 +55,7 @@ class SignupPage(BasePage):
         self.find_element(email_field).send_keys(email)
         self.find_element(phone_field).send_keys(phone)
         self.find_element(register_button).click()
+        sleep(10)
 
     def check_field_error_text(self):
         return self.find_elements(field_error)[0].text

@@ -41,3 +41,38 @@ def test_footer_links_is_correct(driver):
     footer = FooterLinksPage(driver)
     footer.open_page()
     assert footer.other_footer_link()
+
+
+def test_cars_button(driver):
+    menu = FooterLinksPage(driver)
+    menu.open_page()
+    menu.click_cars_button()
+    assert menu.title_name == 'Машины'
+
+
+def test_experience_button(driver):
+    menu = FooterLinksPage(driver)
+    menu.open_page()
+    menu.click_experience_button()
+    assert menu.title_name == 'Бортжурналы'
+
+
+def test_communities_button(driver):
+    menu = FooterLinksPage(driver)
+    menu.open_page()
+    menu.click_communities_button()
+    assert menu.title_name == 'Сообщества'
+
+
+def test_shops_button(driver):
+    menu = FooterLinksPage(driver)
+    menu.open_page()
+    menu.click_shops_button()
+    assert menu.title_name == 'Автосервисы и магазины'
+
+
+def test_market_button(driver):
+    menu = FooterLinksPage(driver)
+    menu.open_page()
+    menu.click_market_button()
+    assert menu.title_name == 'Барахолка'
